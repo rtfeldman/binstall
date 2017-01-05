@@ -1,5 +1,6 @@
 var binstall = require("binstall");
 var path = require("path");
+var fs = require("fs");
 var packageInfo = require(path.join(__dirname, "package.json"));
 
 // Use major.minor.patch from version string - e.g. "1.2.3" from "1.2.3-alpha"
@@ -16,8 +17,13 @@ var url = "https://dl.bintray.com/elmlang/elm-platform/"
   + binVersion + "/" + filename;
 
 var binariesDir = path.join(__dirname, "binaries");
+var packageInfo = require(path.join(__dirname, "package.json"));
+var binaryExtension = process.platform === "win32" ? ".exe" : "";
+var executablePaths = Object.keys(packageInfo.bin).map(function(executable) {
+  return path.join(binariesDir, executable + binaryExtension);
+});
 
-binstall(url, {path: binariesDir, strip: 1}, {verbose: true})
+binstall(url, {path: binariesDir, strip: 1}, {verbose: true, verify: executablePaths})
   .then(function(successMessage) {
     console.log(successMessage);
   }, function(errorMessage) {
