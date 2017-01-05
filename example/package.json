@@ -27,18 +27,7 @@
     "platform.js",
     "binaries"
   ],
-  "keywords": [
-    "bin",
-    "binary",
-    "binaries",
-    "elm",
-    "elm-make",
-    "elm-package",
-    "elm-platform",
-    "elm-reactor",
-    "elm-repl",
-    "platform"
-  ],
+  "keywords": [],
   "bin": {
     "elm": "binaries/elm",
     "elm-make": "binaries/elm-make",

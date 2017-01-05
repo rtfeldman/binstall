@@ -1,2 +1,6 @@
 example
+.git
 .gitignore
+.travis.yml
+appveyor.yml
+.npmignore

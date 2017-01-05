@@ -1,0 +1,50 @@
+sudo: false
+
+env:
+  matrix:
+    - ELM_VERSION=master TARGET_NODE_VERSION=node
+    - ELM_VERSION=master TARGET_NODE_VERSION=4.0.0
+    - ELM_VERSION=0.16 TARGET_NODE_VERSION=node
+    - ELM_VERSION=0.16 TARGET_NODE_VERSION=4.0.0
+
+before_install:
+  - if [ ${TRAVIS_OS_NAME} == "osx" ];
+    then brew update; brew install nvm; mkdir ~/.nvm; export NVM_DIR=~/.nvm; source $(brew --prefix nvm)/nvm.sh; else
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash;
+    fi
+
+install:
+  - nvm install $TARGET_NODE_VERSION
+  - nvm use $TARGET_NODE_VERSION
+  - node --version
+  - npm --version
+
+before_script:
+  - if [ ${TRAVIS_OS_NAME} == "osx" ];
+    then export BINARY_OS_NAME=darwin; else
+    export BINARY_OS_NAME=$TRAVIS_OS_NAME;
+    fi
+  - mkdir tmp
+  - cd tmp
+  - npm init --yes
+
+script:
+  - npm install ../example
+  - node_modules/.bin/elm-make --help
+  - node_modules/.bin/elm-repl --help
+  - node_modules/.bin/elm-package install --help
+  - node_modules/.bin/elm-reactor --help
+  - node_modules/.bin/elm make --help
+  - node_modules/.bin/elm repl --help
+  - node_modules/.bin/elm package install --help
+  - node_modules/.bin/elm reactor --help
+  - npm remove elm
+  - npm install -g ../example
+  - elm-make --help
+  - elm-repl --help
+  - elm-package install --help
+  - elm-reactor --help
+  - elm make --help
+  - elm repl --help
+  - elm package install --help
+  - elm reactor --help
