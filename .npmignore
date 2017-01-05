@@ -4,3 +4,4 @@ example
 .travis.yml
 appveyor.yml
 .npmignore
+README.md
