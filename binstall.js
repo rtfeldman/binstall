@@ -5,7 +5,10 @@ var tar = require("tar");
 var zlib = require("zlib");
 
 function binstall(url, tarArgs, options) {
-  var verbose = typeof options === "object" && options.verbose;
+  options = options || {};
+
+  var verbose = options.verbose;
+  var verify = options.verify;
 
   return new Promise(function(resolve, reject) {
     var untar = tar.Extract(tarArgs)
@@ -13,7 +16,15 @@ function binstall(url, tarArgs, options) {
           reject("Error extracting " + url + " - " + error);
         })
         .on("end", function() {
-          resolve("Successfully downloaded and processed " + url);
+          var successMessage = "Successfully downloaded and processed " + url;
+
+          if (verify) {
+            verifyContents(verify).then(function() {
+              resolve(successMessage);
+            }).catch(reject);
+          } else {
+            resolve(successMessage);
+          }
         });
 
     var gunzip = zlib.createGunzip()
@@ -40,6 +51,24 @@ function binstall(url, tarArgs, options) {
       });
     }).pipe(gunzip).pipe(untar);
   });
+}
+
+function verifyContents(files) {
+  return Promise.all(
+    files.map(function(filePath) {
+      return new Promise(function(resolve, reject) {
+        fs.stat(filePath, function(err, stats) {
+          if (err) {
+            reject(filePath + " was not found.");
+          } else if (!stats.isFile()) {
+            reject(filePath + " was not a file.");
+          } else {
+            resolve();
+          }
+        });
+      });
+    })
+  );
 }
 
 module.exports = binstall;
