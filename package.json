@@ -1,0 +1,31 @@
+{
+  "name": "binstall",
+  "version": "1.0.0",
+  "description": "Install binaries via npm.",
+  "main": "binstall.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtfeldman/binstall.git"
+  },
+  "keywords": [
+    "bin",
+    "binary",
+    "installer"
+  ],
+  "author": "Richard Feldman",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/rtfeldman/binstall/issues"
+  },
+  "homepage": "https://github.com/rtfeldman/binstall#readme",
+  "dependencies": {
+    "request": "2.79.0",
+    "tar": "2.2.1"
+  }
+}
