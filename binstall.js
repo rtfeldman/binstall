@@ -38,7 +38,9 @@ function binstall(url, tarArgs, options) {
         return;
       }
       if (response.statusCode == 404) {
-        reject("Unfortunately, there are currently no Elm Platform binaries available for your operating system and architecture.\n\nIf you would like to build Elm from source, there are instructions at https://github.com/elm-lang/elm-platform#build-from-source\n");
+        var errorMessage = options.errorMessage || "Not Found: " + url;
+
+        reject(errorMessage);
         return;
       }
 
