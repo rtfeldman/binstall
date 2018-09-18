@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/rtfeldman/binstall#readme",
   "dependencies": {
-    "request": "2.79.0",
+    "request": "2.88.0",
     "tar": "2.2.1"
   }
 }
