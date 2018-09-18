@@ -1,6 +1,6 @@
 {
   "name": "binstall",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Install binaries via npm.",
   "main": "binstall.js",
   "directories": {
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/rtfeldman/binstall#readme",
   "dependencies": {
-    "request": "2.79.0",
+    "request": "2.88.0",
     "tar": "2.2.1"
   }
 }
